@@ -16,7 +16,7 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.uflib.ufl.edu/status/")
 time.sleep(3)
 
-target_ids = ["currocclw", "currocc", "currocchscl", "curroccafa", "curroccedu", "curroccsmath", "currocclacc", "curroccgrr", "curroccmap", "curroccpanama"]
+target_ids = ["currocc"]
 
 est = pytz.timezone('US/Eastern')
 timestamp = datetime.now(est).strftime("%Y-%m-%d %H:%M:%S")
