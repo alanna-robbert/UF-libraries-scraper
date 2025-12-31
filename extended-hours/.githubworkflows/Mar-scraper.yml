@@ -1,4 +1,4 @@
-name: Library Occupancy Scraper
+name: Marston 24/5 Occupancy Scraper
 
 on:
   schedule:
