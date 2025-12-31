@@ -2,8 +2,8 @@ name: Marston 24/5 Occupancy Scraper
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Run every hour from 8 AM to 11 PM
-  workflow_dispatch:  # Allow manual trigger
+    - cron: '0 * * * *'  # Run every hour from 8 AM
+  workflow_dispatch: 
 
 jobs:
   scrape:
