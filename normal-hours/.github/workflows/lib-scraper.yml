@@ -2,9 +2,9 @@ name: Library Occupancy Scraper
 
 on:
   schedule:
-    - cron: '0 13-23 * * *'  # Run every hour from 8 AM to 11 PM
+    - cron: '0 13-23 * * *' 
     - cron: '0 0-6 * * *'
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch: 
 
 jobs:
   scrape:
