@@ -7,7 +7,6 @@ from datetime import datetime
 import pytz
 import os
 
-# Configure Chrome for GitHub Actions
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
@@ -19,11 +18,9 @@ time.sleep(3)
 
 target_ids = ["currocclw", "currocc", "currocchscl", "curroccafa", "curroccedu", "curroccsmath", "currocclacc", "curroccgrr", "curroccmap", "curroccpanama"]
 
-# Get current timestamp in EST
 est = pytz.timezone('US/Eastern')
 timestamp = datetime.now(est).strftime("%Y-%m-%d %H:%M:%S")
 
-# Collect data
 data = {"timestamp": timestamp}
 for id_name in target_ids:
     try:
