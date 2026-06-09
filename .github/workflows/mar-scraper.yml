@@ -1,0 +1,35 @@
+name: Marston 24/5 Occupancy Scraper
+
+on:
+  schedule:
+    - cron: '0 7-12 * * *'  # 3 AM - 8 AM ET (extended hours only Marston is open)
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install selenium pytz
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
+
+    - name: Run scraper
+      run: python scraper/scraper.py --ids currocc
+
+    - name: Commit and push CSV
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/library_occupancy.csv
+        git commit -m "Update occupancy data $(date)" || exit 0
+        git push

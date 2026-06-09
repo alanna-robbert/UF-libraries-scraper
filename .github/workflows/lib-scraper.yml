@@ -1,0 +1,36 @@
+name: Library Occupancy Scraper
+
+on:
+  schedule:
+    - cron: '0 13-23 * * *'  # 9 AM - 7 PM ET (normal library hours)
+    - cron: '0 0-6 * * *'    # midnight - 2 AM ET
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install selenium pytz
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
+
+    - name: Run scraper
+      run: python scraper/scraper.py --ids currocclw currocc currocchscl curroccafa curroccedu curroccsmath currocclacc curroccgrr curroccmap curroccpanama
+
+    - name: Commit and push CSV
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/library_occupancy.csv
+        git commit -m "Update occupancy data $(date)" || exit 0
+        git push
